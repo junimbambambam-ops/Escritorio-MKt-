@@ -1,7 +1,7 @@
 // content.js
 console.log("Virtual Office WhatsApp extension loaded.");
 
-const APP_URL = "https://ais-dev-t35kipttdmxzucdk7xau2p-210901668433.us-east1.run.app";
+const APP_URL = "https://ais-pre-t35kipttdmxzucdk7xau2p-210901668433.us-east1.run.app";
 
 function injectFloatingButton() {
   const button = document.createElement("div");

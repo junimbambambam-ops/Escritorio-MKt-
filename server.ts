@@ -16,6 +16,13 @@ async function startServer() {
 
   const PORT = 3000;
 
+  // Middleware to allow iframing from WhatsApp Web
+  app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "frame-ancestors 'self' https://web.whatsapp.com");
+    res.removeHeader("X-Frame-Options");
+    next();
+  });
+
   // Real-time Office State
   const users: Record<string, any> = {};
 
@@ -66,11 +73,18 @@ async function startServer() {
       server: { middlewareMode: true },
       appType: "spa",
     });
+    app.use((req, res, next) => {
+      res.setHeader("Content-Security-Policy", "frame-ancestors 'self' https://web.whatsapp.com");
+      res.removeHeader("X-Frame-Options");
+      next();
+    });
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
+      res.setHeader("Content-Security-Policy", "frame-ancestors 'self' https://web.whatsapp.com");
+      res.removeHeader("X-Frame-Options");
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
