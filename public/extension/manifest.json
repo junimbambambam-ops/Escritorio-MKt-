@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Virtual Office WhatsApp",
+  "version": "1.0",
+  "description": "Transforma o WhatsApp Web em um escritório virtual.",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}
